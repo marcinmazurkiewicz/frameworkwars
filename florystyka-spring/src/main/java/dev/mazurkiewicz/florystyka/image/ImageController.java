@@ -1,4 +1,4 @@
-package dev.mazurkiewicz.florystyka.resource;
+package dev.mazurkiewicz.florystyka.image;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/resources")
-public class ResourceController {
+@RequestMapping("/resources/img")
+public class ImageController {
 
-    private final ResourceService service;
+    private final ImageService service;
 
-    public ResourceController(ResourceService service) {
+    public ImageController(ImageService service) {
         this.service = service;
     }
 
-    @GetMapping(value = "/img/{filename}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
+    @GetMapping(value = "/{filename}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
     public ResponseEntity<ByteArrayResource> getImage(@PathVariable("filename") String filename) {
         ByteArrayResource resource = new ByteArrayResource(service.getImage(filename));
         HttpHeaders headers = new HttpHeaders();

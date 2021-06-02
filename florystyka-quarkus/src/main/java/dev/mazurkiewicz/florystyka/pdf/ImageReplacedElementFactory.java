@@ -2,7 +2,7 @@ package dev.mazurkiewicz.florystyka.pdf;
 
 import com.lowagie.text.Image;
 import dev.mazurkiewicz.florystyka.exception.PdfRenderException;
-import dev.mazurkiewicz.florystyka.image.ImageService;
+import dev.mazurkiewicz.florystyka.resource.ImageService;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.extend.FSImage;
 import org.xhtmlrenderer.extend.ReplacedElement;
@@ -14,12 +14,12 @@ import org.xhtmlrenderer.pdf.ITextImageElement;
 import org.xhtmlrenderer.render.BlockBox;
 import org.xhtmlrenderer.simple.extend.FormSubmissionListener;
 
-public class ImageReplacedElementFactory implements ReplacedElementFactory {
+class ImageReplacedElementFactory implements ReplacedElementFactory {
 
     private final ReplacedElementFactory superFactory;
     private final ImageService imageService;
 
-    public ImageReplacedElementFactory(ReplacedElementFactory superFactory, ImageService imageService) {
+    ImageReplacedElementFactory(ReplacedElementFactory superFactory, ImageService imageService) {
         this.superFactory = superFactory;
         this.imageService = imageService;
     }

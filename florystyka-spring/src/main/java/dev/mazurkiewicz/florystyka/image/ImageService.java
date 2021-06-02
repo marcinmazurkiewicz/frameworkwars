@@ -1,4 +1,4 @@
-package dev.mazurkiewicz.florystyka.resource;
+package dev.mazurkiewicz.florystyka.image;
 
 import dev.mazurkiewicz.florystyka.exception.FileTypeException;
 import dev.mazurkiewicz.florystyka.exception.ResourceNotFoundException;
@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class ResourceService {
+public class ImageService {
 
     private final String resourcesFolder;
     private final String questionsImgFolder;
 
-    public ResourceService(@Value("${dev.mazurkiewicz.florystyka.resourcesFolder}") String resourcesFolder,
-                           @Value("${dev.mazurkiewicz.florystyka.questionsImgFolder}") String questionsImgFolder) {
+    public ImageService(@Value("${dev.mazurkiewicz.florystyka.resourcesFolder}") String resourcesFolder,
+                        @Value("${dev.mazurkiewicz.florystyka.questionsImgFolder}") String questionsImgFolder) {
         this.resourcesFolder = resourcesFolder;
         this.questionsImgFolder = questionsImgFolder;
     }
