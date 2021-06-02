@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        table {
+            width: 100%;
+            display: table;
+            padding: 16px;
+            margin-top: 16px;
+            border-collapse: collapse;
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+
+        td, th {
+            display: table-cell;
+            padding: 10px;
+            border: 1px solid #000;
+            font-size: 14px;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            page-break-inside: avoid;
+        }
+
+        .question-wrapper {
+            margin-top: 32px;
+            page-break-inside: avoid;
+        }
+
+        .answers-table {
+            page-break-before: always;
+            page-break-inside: avoid;
+            text-align: center;
+        }
+
+        .question {
+            font-weight: bold;
+        }
+
+        .site-info {
+            display: block;
+            font-size: 10px;
+            text-align: right
+        }
+
+        .doc-title {
+            display: block;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+            padding-top: 60px;
+            margin-bottom: 16px;
+        }
+
+        .doc-subtitle {
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <span class="site-info">https://egzamin-florystyka.pl</span>
+    <h1 class="doc-title">Kwalifikacja zawodowa R.26</h1>
+    <p class="doc-subtitle">Wykonywanie kompozycji florystycznych (test próbny)</p>
+    <div th:each="question, iter: ${questions}" class="question-wrapper">
+        <p class="question">
+            <span th:text="${(iter.index+1) + '.'}"/>
+            <span th:utext="${question.content}"/>
+        </p>
+        <img th:if="${question.img != null}" class="image" th:src="@{${question.img}}"/>
+        <p>
+            <span>A.</span>
+            <span th:utext="${question.answerA}"/>
+        </p>
+        <p>
+            <span>B.</span>
+            <span th:utext="${question.answerB}"/>
+        </p>
+        <p>
+            <span>C.</span>
+            <span th:utext="${question.answerC}"/>
+        </p>
+        <p>
+            <span>D.</span>
+            <span th:utext="${question.answerD}"/>
+        </p>
+    </div>
+    <div class="answers-table">
+        <h1>Klucz odpowiedzi</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Nr pytania</th>
+                <th>Prawidłowa odpowiedź</th>
+                <th>Nr pytania</th>
+                <th>Prawidłowa odpowiedź</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i: ${#numbers.sequence(0, __${answersTableRows}__-1, 1)}">
+                <td>
+                    <span th:text="${(i+1) + '.'}"/>
+                </td>
+                <td>
+                    <span th:text="${questions[__${i}__].correct}"/>
+                </td>
+                <td>
+                    <span th:if="${i+answerOffset < questions.size()}" th:text="${(i+answerOffset+1) + '.'}"/>
+                </td>
+                <td>
+                    <span th:if="${i+answerOffset < questions.size()}" th:text="${questions[__${i+answerOffset}__].correct}"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</header>
+</body>
+</html>
